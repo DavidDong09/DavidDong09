@@ -1,10 +1,29 @@
-- 👋 Hi, I’m @DavidDong09
-- 👀 I’m interested in ...
-- 🌱 I’m currently learning ...
-- 💞️ I’m looking to collaborate on ...
-- 📫 How to reach me ...
+# connection doc
+  https://docs.databricks.com/en/dev-tools/python-sql-connector.html
 
-<!---
-DavidDong09/DavidDong09 is a ✨ special ✨ repository because its `README.md` (this file) appears on your GitHub profile.
-You can click the Preview link to take a look at your changes.
---->
+# demo code
+~~~ python
+from databricks import sql
+import pandas as pd
+from rmfs.utils import cfg
+
+conn= sql.connect (server_hostname=cfg.data_server["server_hostname"],
+                    http_path=cfg.data_server["http_path"],
+                access_token=cfg.data_server["access_token"])
+
+
+def querybtdpcn():
+    sql_test="""select * from riads.v_dim_ri_iscreening_question"""
+    df=pd.read_sql(sql_test, conn)
+    print (df.head(6))
+
+
+
+
+querybtdpcn()
+
+
+
+
+~~~
+
